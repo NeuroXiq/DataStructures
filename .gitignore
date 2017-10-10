@@ -1,0 +1,7 @@
+.vs/
+*.sln
+*.csproj
+bin/
+obj/
+[dD]ebug/
+[rR]elase/
