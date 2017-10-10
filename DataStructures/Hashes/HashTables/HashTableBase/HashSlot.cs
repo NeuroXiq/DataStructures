@@ -1,6 +1,6 @@
 namespace DataStructures.HashTables
 {
-	internal class HashSlot
+	public class HashSlot // SHO'uLD BE INTERNAL !!!
 	{
 		public object key;
 		public object value;

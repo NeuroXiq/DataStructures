@@ -1,12 +1,12 @@
 namespace DataStructures.HashTables
 {
-	public struct HeadNode
+	public class HeadNode
 	{
 		public ListNode Next {get; private set;}
 		
-		public HeadNode() : this(null)
+		public HeadNode()
 		{
-			
+            this.Next = null;
 		}
 		
 		public HeadNode(ListNode next) 

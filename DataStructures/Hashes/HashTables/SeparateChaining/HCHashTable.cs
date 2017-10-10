@@ -48,7 +48,7 @@ namespace DataStructures.HashTables
 		
 		public override void SetValue(object key, object value)
 		{
-			ExtendArrayIfNeed();
+			//ExtendArrayIfNeed();
 			
 			bool newOccupied = SetValueInTable(key, value, this.table);
 			
@@ -85,7 +85,7 @@ namespace DataStructures.HashTables
 			{
 				setNew = true;
 			}
-		
+            return setNew;
 		}
 		
 		private object GetValueFromTable(object key, HeadNode[] table, out bool found)

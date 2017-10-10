@@ -13,7 +13,7 @@ namespace DataStructures.HashTables
 	{
 		private const double MAX_LOAD_FACTOR = (double)0.7;
 		
-		public HashSlot[] table; // test public
+		private HashSlot[] table; // test public
 		private int entries;
 		
 		
