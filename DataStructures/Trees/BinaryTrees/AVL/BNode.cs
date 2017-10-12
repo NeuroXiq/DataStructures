@@ -4,36 +4,39 @@ namespace DataStructures.Trees.BinaryTrees
 	///<seealso cref="BinaryTreesNs.AVL">AVL binary tree.</seealso>
 	public class BNode
 	{
-		///<summary>Get left BNode child of current node. </summary>
-		public BNode Left {get; private set; }
+		///<summary>Get or set left BNode child of current node. </summary>
+		public BNode Left {get; set; }
 		///<summary>Get or set right BNode child of current node.</summary>
-		public BNode Right {get; private set; }
-		///<summary>Get parent node of current node.</summary>
-		public BNode Parent {get; private set; }
-		///<summary>Gets height of subtree</summary>
-		public int Height { get; private set;}
-		///<summary>Get current key of the node</summary>
-		public int Key {get; private set;}
+		public BNode Right {get; set; }
+		///<summary>Get or set parent node of current node.</summary>
+		public BNode Parent {get; set; }
+		///<summary>Get or set height of subtree</summary>
+		public int Height { get; set;}
+		///<summary>Get ot set current key of the node</summary>
+		public int Key {get; set;}
 		
 		///<summary>Initialize new instance of BNode.</summary>
 		///<param name="key">Key to be assign to the node.</param>
-		public BNode(int key) : this(key,null)
+		public BNode(int key) : this(key,0, null,null,null)
 		{
 			
 		}
 		///<summary>Initialize new instance of BNode.</summary>		
 		///<param name="key">Key to be assign to the node</param>
 		///<param name="parent"> Parent of the <see cref="BNode"/></param>
-		public BNode(int key, BNode parent) : this(key, parent, null, null)
+		public BNode(int key, BNode parent) : this(key, 0, parent, null, null)
 		{
 			
 		}
+
+        public BNode(int key, int height, BNode parent) : this(key, height, parent, null, null)
+        { }
 		///<summary>Initialize new insance of BNode</summary>
 		///<param name="key">Key to be assign to the node</param>
 		///<param name="parent">Parent of <see cref="BNode"/></param>
 		///<param name="left">Left child of<see cref="BNode"/></param>
 		///<param name="right">Right child of <see cref="BNode"/></param>
-		public BNode(int key, BNode parent, BNode left, BNode right)
+		public BNode(int key,int height, BNode parent, BNode left, BNode right)
 		{
 			this.Key = key;
 			this.Parent = parent;
