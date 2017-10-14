@@ -67,7 +67,7 @@ implemented structures with start characted (*).
 *		Array list
 *		Linked list
 		Self-organizing list
-		Skip list
+*		Skip list
 		Unrolled linked list
 		VList
 		Conc-Tree list
@@ -81,7 +81,7 @@ implemented structures with start characted (*).
 	
 	Binary trees [3.1]
 		AA tree
-		AVL tree
+	*	AVL tree
 	*	Binary search tree 
 		Binary tree
 		Cartesian tree
