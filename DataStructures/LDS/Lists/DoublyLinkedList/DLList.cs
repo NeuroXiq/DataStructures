@@ -72,7 +72,7 @@ namespace DataStructures.LDS.Lists
         ///<returns>Array of <see cref="T"> elements </returns>
         public override T[] GetTail(T origin)
         {
-            IEnumerator<T> iterator;
+            DLListIterator<T> iterator;
             int start = GetIndexOf(origin, out iterator);
             if (start > -1)
             {
@@ -109,20 +109,37 @@ namespace DataStructures.LDS.Lists
             beforeHeadNode.Next.SetPrevious(newNode);
         }
 
+        public override void Remove(T value)
+        {
+            DLListIterator<T> toRemoveIterator;
+            int index = GetIndexOf(value, out toRemoveIterator);
+
+            if (index > -1)
+            {
+                DLListNode<T> toDelete = toRemoveIterator.GetCurrentNode();
+                toDelete.Previous.SetNext(toDelete.Next);
+                toDelete.Next.SetPrevious(toDelete.Previous);
+
+                //remove references
+                toDelete.SetNext(null);
+                toDelete.SetPrevious(null);
+            }
+        }
+
         #endregion
 
         private int GetIndexOf(T value)
         {
-            IEnumerator<T> ignore;
+            DLListIterator<T> ignore;
             return GetIndexOf(value, out ignore);
         }
 
         //returns iterator which points to founded element or (if not found) to afterEndNode
         //it can help if we need to do something else with elements near to 'value'
-        private int GetIndexOf(T value, out IEnumerator<T> iteratorStop)
+        private int GetIndexOf(T value, out DLListIterator<T> iteratorStop)
         {
             int index = 0;
-            IEnumerator<T> iterator = GetEnumerator();
+            DLListIterator<T> iterator = GetEnumerator() as DLListIterator<T>;
 
             while(iterator.MoveNext())
             {

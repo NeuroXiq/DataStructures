@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataStructures.LDS.Lists
 {
@@ -20,6 +16,12 @@ namespace DataStructures.LDS.Lists
             this.current = beforeHeadNode;
         }
 
+        public DLListNode<T> GetCurrentNode()
+        {
+            return current;
+        }
+
+        #region IEnumerator
 
         public T Current
         {
@@ -58,5 +60,7 @@ namespace DataStructures.LDS.Lists
         {
             this.current = beforeHeadNode;
         }
+
+        #endregion
     }
 }

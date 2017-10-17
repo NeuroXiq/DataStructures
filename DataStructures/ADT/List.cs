@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataStructures.ADT
+﻿namespace DataStructures.ADT
 {
+    // TODO add Remove method
+    
     ///<summary>Base prototype of abstract data type - List</summary>
     public abstract class List<T>
     {
@@ -22,5 +18,6 @@ namespace DataStructures.ADT
         public abstract void Append(T value);
         public abstract T GetHead();
         public abstract T[] GetTail(T origin);
+        public abstract void Remove(T value);
     }
 }
