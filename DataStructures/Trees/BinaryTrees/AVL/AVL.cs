@@ -154,7 +154,44 @@ namespace DataStructures.Trees.BinaryTrees
 
         private void TwoChildsDelete(BNode nodeToDelete)
         {
+            BNode successor = nodeToDelete.Right;
+            
+            //find successor
+            while (successor.Left != null)
+                successor = successor.Left;
 
+            BNode rebalanceOrigin = null;
+
+            //replace successor with nodeToDelete
+            //we can just replace keys (all references stay as should)
+            //and delete successor
+            nodeToDelete.SetKey(successor.Key);
+            if (nodeToDelete.Right == successor)
+            {
+                nodeToDelete.SetRight(successor.Right);
+                if (successor.Right != null)
+                    successor.Right.SetParent(nodeToDelete);
+
+                UpdateHeight(nodeToDelete);
+                rebalanceOrigin = nodeToDelete;
+            }
+            else
+            {
+                successor.Parent.SetLeft(successor.Right);
+                if (successor.Right != null)
+                    successor.Right.SetParent(successor.Parent);
+
+                UpdateHeight(successor.Parent);
+                rebalanceOrigin = successor.Parent;
+            }
+
+            RebalanceTree(rebalanceOrigin);
+        }
+
+        ///<summary>replace 'source' to 'destiny', change all needed references etc.</summary>
+        private void ReplaceNodeWith(BNode source, BNode destiny)
+        {
+         
         }
 
         private void NoChildsDelete(BNode nodeToDelete)
