@@ -32,8 +32,8 @@ implemented structures with start characted (*).
 	Set
 	Bag
 	Multiset
-	Stack
-	Queue
+	Stack				/LSD/Common
+	Queue				/LDS/Common
 	Double-ended queue
 	Priority queue
 	Tree
@@ -62,7 +62,7 @@ implemented structures with start characted (*).
 		Sparse matrix
 		Iliffe vector
 		Variable-length array
-	Types of Lists[2.2]
+	Types of Lists[2.2] /LDS/Lists
 		Doubly linked list
 *		Array list
 *		Linked list
@@ -79,7 +79,7 @@ implemented structures with start characted (*).
 		
 [Trees][3]
 	
-	Binary trees [3.1]
+	Binary trees [3.1]	/Trees/BinaryTrees/
 		AA tree
 	*	AVL tree
 	*	Binary search tree 
@@ -89,7 +89,7 @@ implemented structures with start characted (*).
 		Order statistic tree
 		Pagoda
 		Randomized binary search tree
-		Red–black tree
+	*	Red–black tree
 		Rope
 		Scapegoat tree
 		Self-balancing binary search tree
@@ -115,7 +115,7 @@ implemented structures with start characted (*).
 		Bx-tree
 		AList
 	
-	Heaps[3.3]
+	Heaps[3.3]	/Trees/Heaps
 	*	Heap
 		Binary heap
 		Weak heap
@@ -207,7 +207,7 @@ implemented structures with start characted (*).
 		Log-structured merge-tree
 		Lexicographic Search Tree
 		
-[Hashes][4]
+[Hashes][4]		/Hashes
 	Count-Min sketch
 	Distributed hash table
 *	Double Hashing
