@@ -3,9 +3,11 @@ using System;
 
 namespace DataStructures.Trees.BinaryTrees
 {
+    // TODO implement deletion
+
     public class RBTree<T>
     {
-        private RBNode<T> root;
+        public RBNode<T> root;
         private int nodesCount;
         //private Func<T, T, bool> valueComparisonEquality;
         private Comparison<T> valueComparison;
@@ -61,78 +63,92 @@ namespace DataStructures.Trees.BinaryTrees
 
         public void Insert(T value)
         {
-            if (nodesCount == 0)
-            {
-                root = new RBNode<T>(Color.Black);
-            }
-            else if(!Contains(value))
+           if(!Contains(value))
             {
                 RBNode<T> insertedNode = InsertNode(new RBNode<T>(value));
-
-
-
+                RepairTree(insertedNode);
             }
-            else throw new InvalidOperationException("Cannot insert value which exist in the tree");
+            else throw new InvalidOperationException("Cannot insert value which actually exist in the tree");
 
             nodesCount++;
-        }
-
-        private RBNode<T> InsertNode(RBNode<T> node)
-        {
-            RBNode<T> current = root;
-            int compResult = 0;
-
-            while (true)
-            {
-                compResult = valueComparison(node.Value, current.Value);
-                if (compResult < 0)
-                {
-                    if (current.Left == null)
-                        break;
-                    else current = current.Left;
-                }
-                else
-                {
-                    if (current.Right == null)
-                        break;
-                    else current = current.Left;
-                }
-            }
-
-            node.SetParent(current);
-            node.SetColor(Color.Red);
-
-            if (compResult < 0)
-            {
-                current.SetLeft(node);
-            }
-            else
-            {
-                current.SetRight(node);
-            }
-
-            return node;
         }
 
         private void RepairTree(RBNode<T> origin)
         {
             if (origin.Parent == null)
+            {
                 RepairRootNode(origin);
+                root = origin;
+            }
             else if (origin.Parent.Color == Color.Black)
             {
-                RepairBlackParentNode(origin);
+                // its ok .
             }
-            //else if(
+            else if (origin.Parent.Parent != null)
+            {
+                if (GetUncleColor(origin) == Color.Red)
+                {
+                    RepairRedUncle(origin);
+                }
+                else
+                {
+                    RepairBlackUncle(origin);
+                }
+            }
+            else
+            {
+                RepairBlackUncle(origin);
+            }
+
+            root = origin;
+            while (root.Parent != null)
+            {
+                root = root.Parent;
+            }
         }
 
-        private void RepairBlackParentNode(RBNode<T> origin)
+        private void RepairRedUncle(RBNode<T> origin)
         {
-            throw new NotImplementedException();
+            RBNode<T> uncle = GetUncle(origin);
+            origin.Parent.SetColor(Color.Black);
+            uncle.SetColor(Color.Black);
+            origin.Parent.Parent.SetColor(Color.Red);
+
+            RepairTree(origin.Parent.Parent);
+        }
+
+        private RBNode<T> GetUncle(RBNode<T> origin)
+        {
+            RBNode<T> grand = origin.Parent.Parent;
+
+            if (grand.Left == origin)
+                return grand.Right;
+            else return grand.Left;
+        }
+
+        private void RepairBlackUncle(RBNode<T> origin)
+        {
+            RBNode<T> grand = origin.Parent.Parent;
+            RBNode<T> secondRotateNode = origin.Parent;
+
+            if (grand.Right != null)
+                if (grand.Right.Left == origin)
+                    secondRotateNode = RotateRight(origin.Parent, origin);
+            if (grand.Left != null)
+                if (grand.Left.Right == origin)
+                    secondRotateNode = RotateLeft(origin.Parent, origin);
+
+            if (grand.Left == secondRotateNode)
+                RotateRight(grand, secondRotateNode);
+            else RotateLeft(grand, secondRotateNode);
+
+            origin.Parent.SetColor(Color.Black);
+            grand.SetColor(Color.Red);
         }
 
         private void RepairRootNode(RBNode<T> origin)
         {
-            throw new NotImplementedException();
+            origin.SetColor(Color.Black);
         }
 
         public void Delete(T value)
@@ -203,6 +219,73 @@ namespace DataStructures.Trees.BinaryTrees
             return null;
         }
 
+        ///<summary>binary insert, node color is set to RED</summary>
+        private RBNode<T> InsertNode(RBNode<T> node)
+        {
+            if (root == null)
+            {
+                root = new RBNode<T>(Color.Red);
+                return root;
+            }
+
+            RBNode<T> current = root;
+            int compResult = 0;
+
+            while (true)
+            {
+                compResult = valueComparison(node.Value, current.Value);
+                if (compResult < 0)
+                {
+                    if (current.Left == null)
+                        break;
+                    else current = current.Left;
+                }
+                else
+                {
+                    if (current.Right == null)
+                        break;
+                    else current = current.Right;
+                }
+            }
+
+            node.SetParent(current);
+            node.SetColor(Color.Red);
+
+            if (compResult < 0)
+            {
+                current.SetLeft(node);
+            }
+            else
+            {
+                current.SetRight(node);
+            }
+
+            return node;
+        }
+
+        ///<remarks>
+        /// If Uncle is NULL returns black (!)
+        /// otherwise returns node color.
+        ///</remarks>
+        private Color GetUncleColor(RBNode<T> node)
+        {
+            RBNode<T> grand = node.Parent.Parent;
+
+            if (grand.Left == node.Parent)
+            {
+                if (grand.Right != null)
+                    return grand.Right.Color;
+                else return Color.Black;
+            }
+            else
+            {
+                if (grand.Left != null)
+                    return grand.Left.Color;
+                else return Color.Black;
+            }
+
+        }
+
         ///<summary>Rotate left</summary>
         ///<returns>Returns new root (parent) node</returns>
         private RBNode<T> RotateLeft(RBNode<T> parent, RBNode<T> child)
@@ -222,7 +305,7 @@ namespace DataStructures.Trees.BinaryTrees
             return child;
         }
 
-        private void RotateRight(RBNode<T> parent, RBNode<T> child)
+        private RBNode<T> RotateRight(RBNode<T> parent, RBNode<T> child)
         {
             child.SetParent(parent.Parent); 
             if (parent.Parent != null)
@@ -235,6 +318,8 @@ namespace DataStructures.Trees.BinaryTrees
             parent.SetParent(child);
             parent.SetLeft(child.Right);
             child.SetRight(parent);
+
+            return child;
         }
 
         private bool IsRightChild(RBNode<T> node)

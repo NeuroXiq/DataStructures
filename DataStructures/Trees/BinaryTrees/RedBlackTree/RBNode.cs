@@ -22,7 +22,7 @@
 
         public RBNode(T value)
         {
-            this.value = value;     
+            this.Value = value;
         }
 
         public void SetLeft(RBNode<T> left)
