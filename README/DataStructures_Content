@@ -32,8 +32,8 @@ implemented structures with start characted (*).
 	Set
 	Bag
 	Multiset
-	Stack				/LSD/Common
-	Queue				/LDS/Common
+*	Stack				/LSD/Common
+*	Queue				/LDS/Common
 	Double-ended queue
 	Priority queue
 	Tree
