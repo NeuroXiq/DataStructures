@@ -1,5 +1,7 @@
 **Data Structures**
 
-This repository contain implementation in C# basic programming data strcuters.
-Every directory contains source file with implementation of data structure and 
-'example.cs' file with some examples of usage.
+Repository contains implementation in C# basic programming data strcuters.
+Lots of data structures are listed in DataStructures_Content file.
+Implemented structures are marked with asterix ('*'). Every path/directory of
+structure are also specified in this file.
+

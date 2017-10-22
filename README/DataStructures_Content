@@ -18,11 +18,7 @@
 
 
 [Basic Informations]
-
-This file contains probably all possible data structures. 
-Most of them not implemented now. Im marked 
-implemented structures with start characted (*). 
-
+-- need to update --
 
 [Abstract data types][1]
 	Container
@@ -84,7 +80,7 @@ implemented structures with start characted (*).
 	*	AVL tree
 	*	Binary search tree 
 		Binary tree
-		Cartesian tree
+	*	Cartesian tree
 		Left-child right-sibling binary tree
 		Order statistic tree
 		Pagoda

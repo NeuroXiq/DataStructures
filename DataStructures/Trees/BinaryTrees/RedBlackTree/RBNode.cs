@@ -2,8 +2,6 @@
 {
     public class RBNode<T>
     {
-        private T value;
-
         public RBNode<T> Right { get; private set; }
         public RBNode<T> Left { get;  private set; }
         public RBNode<T> Parent { get; private set; }
