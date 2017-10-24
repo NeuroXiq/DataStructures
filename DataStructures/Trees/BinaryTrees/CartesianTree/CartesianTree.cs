@@ -36,14 +36,13 @@ namespace DataStructures.Trees.BinaryTrees
 
         private void BuildTreeFromArray(T[] array)
         {
-            CTBuilder<T> treeBuilder = GetTreeBuilder();
-            root = treeBuilder.BuildTree(array); 
+            // choosing algorithm to build tree (today is only one algorithm named 'CTBSift')
+
+            CTBSift<T> siftBuildAlgorithm = new CTBSift<T>(compare);
+            CTBuilder<T> ctBuilder = new CTBuilder<T>(siftBuildAlgorithm);
+
+            root = ctBuilder.CreateTree(array);
         }
 
-
-        private CTBuilder<T> GetTreeBuilder()
-        {
-            return new CTBSift<T>(compare);
-        }
     }
 }

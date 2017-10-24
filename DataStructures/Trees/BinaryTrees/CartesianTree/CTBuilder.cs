@@ -1,11 +1,21 @@
-﻿namespace DataStructures.Trees.BinaryTrees
+﻿using DataStructures.Trees.BinaryTrees.CartesianTree;
+
+namespace DataStructures.Trees.BinaryTrees
 {
-    ///<summary>Cartesian tree builder interface</summary>
-    public abstract class CTBuilder<T>
+    ///<summary>Cartesian tree builder</summary>
+    ///<remarks>Strategy design patters</remarks>
+    public class CTBuilder<T>
     {
-        ///<summary>Build tree</summary>
-        ///<param name="array">Base of tree structure array</param>
-        ///<returns>Returns root <see cref="CTNode{T}"/> node of the tree</returns>
-        public abstract CTNode<T> BuildTree(T[] array);
+        protected CTBuildAlgorithm<T> buildAlgorithm;
+
+        public CTBuilder(CTBuildAlgorithm<T> algorithm)
+        {
+            buildAlgorithm = algorithm;
+        }
+
+        public CTNode<T> CreateTree(T[] array)
+        {
+            return buildAlgorithm.BuildTree(array);
+        }
     }
 }

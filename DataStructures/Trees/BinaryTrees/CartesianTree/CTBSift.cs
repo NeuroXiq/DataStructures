@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataStructures.Trees.BinaryTrees.CartesianTree;
+using System;
 
 namespace DataStructures.Trees.BinaryTrees
 {
@@ -12,7 +13,7 @@ namespace DataStructures.Trees.BinaryTrees
     ///because the time spent searching for the parent y of each new node x can be charged against the number of nodes
     ///that are removed from the rightmost path in the tree.
     /// </remarks>
-    public class CTBSift<T> : CTBuilder<T>
+    public class CTBSift<T> : CTBuildAlgorithm<T>
     {
         private readonly Comparison<T> compare;
 
@@ -22,7 +23,6 @@ namespace DataStructures.Trees.BinaryTrees
                 throw new ArgumentNullException("Comparison delegate cannot be null");
             compare = comparisonDelegate;
         }
-
 
         public override CTNode<T> BuildTree(T[] array)
         {
@@ -41,7 +41,7 @@ namespace DataStructures.Trees.BinaryTrees
         }
 
         ///<summary>Insert new node</summary>
-        ///<param name="prev">Previous inserted node</param>
+        ///<param name="prev">Node inserted before</param>
         ///<param name="value">Value of new node</param>
         ///<returns>Returns new inserted node</returns>
         private CTNode<T> InsertNewNode(CTNode<T> prev, T value)
@@ -89,6 +89,7 @@ namespace DataStructures.Trees.BinaryTrees
 
         ///<summary>Indicates whether v1 is greater than v2</summary>
         ///<return>True is v1 is bigger than v2 otherwise returns false</return>
+        ///<returns>If value are equals also returns false</returns>
         private bool IsBigger(T v1, T v2)
         {
             int compareResult = compare(v1, v2);
