@@ -204,6 +204,7 @@
 		Lexicographic Search Tree
 		
 [Hashes][4]		/Hashes
+*	Bloom filter
 	Count-Min sketch
 	Distributed hash table
 *	Double Hashing

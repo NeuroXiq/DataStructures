@@ -9,7 +9,9 @@ namespace DataStructures.HashTables
 	* Implementation of separate chaining with list head cells hash table
 	*
 	*/
-	
+	//TODO implement this
+
+
 	public class HCHashTable : HashTableBase
 	{
 		private const double MAX_LOAD_FACTOR = (double)0.65;

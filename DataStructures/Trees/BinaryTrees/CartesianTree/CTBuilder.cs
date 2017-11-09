@@ -3,7 +3,7 @@
 namespace DataStructures.Trees.BinaryTrees
 {
     ///<summary>Cartesian tree builder</summary>
-    ///<remarks>Strategy design patters</remarks>
+    ///<remarks>Strategy design pattern</remarks>
     public class CTBuilder<T>
     {
         protected CTBuildAlgorithm<T> buildAlgorithm;

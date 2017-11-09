@@ -1,0 +1,49 @@
+﻿//namespace
+using DataStructures.Hashes.BloomFilterDS;
+
+private static void Example()
+        {
+            // what to use
+            HashAlgorithm md5 = MD5.Create();
+            HashAlgorithm sha1 = SHA1.Create();
+            HashAlgorithm sha2 = SHA256.Create();
+            HashAlgorithm sha3 = SHA384.Create();
+
+            //array of it
+            HashAlgorithm[] algorithms = new HashAlgorithm[] { md5, sha1, sha2, sha3 };
+            HashFunctionArray algorithmsList = new HashFunctionArray(algorithms);
+            
+            //bit array length
+            int bitArrayLength = 12345;
+            
+            //filter
+            BloomFilter filter = new BloomFilter(algorithmsList, bitArrayLength);
+
+            //example data
+            string test1 = "some test string";
+            string test2 = "test 2";
+            string notAdded = "not added string";
+
+            //data must be bytes
+            byte[] test1Bytes = Encoding.ASCII.GetBytes(test1);
+            byte[] test2Bytes = Encoding.ASCII.GetBytes(test2);
+            byte[] notAddedBytes = Encoding.ASCII.GetBytes(notAdded);
+
+            //insert
+
+            filter.Add(test1Bytes);
+            filter.Add(test2Bytes);
+
+            Console.WriteLine("Query for test1 =>\t" + filter.Query(test1Bytes));
+            Console.WriteLine("Query for test2 =>\t" + filter.Query(test2Bytes));
+            Console.WriteLine("Query for notAdded =>\t" + filter.Query(notAddedBytes));
+
+            /*
+             * Output:
+             * Query for test1 =>      True
+             * Query for test2 =>      True
+             * Query for notAdded =>   False
+             * 
+             * */
+
+        }
